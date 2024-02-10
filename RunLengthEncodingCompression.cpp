@@ -11,6 +11,7 @@ class RunLengthEncodingCompression : public ICompression<Container>, public IDec
 
 
 public:
+    RunLengthEncodingCompression() = default;
     ~RunLengthEncodingCompression() override = default;
 
     vector<pair<int, Container>> compressData(Container data) override {
@@ -20,16 +21,16 @@ public:
     auto it = data.begin();
     while (it != data.end()) {
         int count = 1;
-        auto next = std::next(it);
-        while (next != data.end() && *it == *next) {
+        auto nextSign = std::next(it);
+        while (nextSign != data.end() && *it == *nextSign) {
             ++count;
-            ++next;
+            ++nextSign;
         }
 
         mCompressedData.push_back(make_pair(count, Container(*it)));
-        mCompressedString += to_string(count) + *it;
+        mCompressedString += to_string(count) + to_string(*it);
 
-        it = next;
+        it = nextSign;
         }
 
     return mCompressedData;
@@ -89,6 +90,15 @@ public:
         return mCompressedString;
     }
 
+    void printCompressedData() const {
+        for (const auto& pair : mCompressedData) {
+            cout << "(" << pair.first << ", ";
+            for (const auto& element : pair.second) {
+                cout << element << " ";
+            }
+            cout << ")" << endl;
+        }
+}
 
 private:
     vector<pair<int, Container>> mCompressedData;

@@ -16,22 +16,7 @@ template <typename Container>
 class RunLengthEncodingCompression : public ICompression<Container>, public IDecompression<Container>
 {
 public:
-    /*virtual*/ /*~RunLengthEncodingCompression() override = default; // dostarczenie implementacji funkcji ktora byla wirtualna, jak funkcja bazowa nie byla wirtualna to kompilator wywali blad
-
-    //ICompression<Container>::encodedDataType compressData(Container data) override; // zastanowic sie jak to zrobic
-
-    vector<pair<int, Container>>  compressData(Container data) override;
-
-    Container decompressData() override;
-
-    int numberOfFirstElements() const;
-
-    vector<pair<int, Container>> getCompressedData() const override;
-
-    Container getDecompressedData() const override;
-
-    string getCompressedString() const override;*/
-
+    RunLengthEncodingCompression() = default;
     ~RunLengthEncodingCompression() override = default;
 
     vector<pair<int, Container>> compressData(Container data) override {
@@ -47,33 +32,16 @@ public:
             ++nextSign;
         }
 
-        mCompressedData.push_back(make_pair(count, Container(*it)));
-        mCompressedString += to_string(count) + *it;
+        Container compressedValue;
+        compressedValue.push_back(*it); // Push the actual value instead of *it itself
 
+        mCompressedData.push_back(make_pair(count, compressedValue));
+        mCompressedString += to_string(count) + to_string(*it);
         it = nextSign;
         }
 
     return mCompressedData;
     }
-
-    /*vector<pair<int, Container>> compressData(Container data) override {
-        mCompressedData.clear();
-        mCompressedString.clear();
-
-        for (size_t i = 0; i < data.size(); i++) {
-            int count = 1;
-
-            while (i + 1 < data.size() && data[i] == data[i + 1]) {
-                i++;
-                count++;
-            }
-
-            mCompressedData.push_back(make_pair(count, data[i]));
-            mCompressedString += to_string(count) + data[i];
-        }
-
-        return mCompressedData;
-    }*/
 
     Container decompressData() override {
         mDecompressedData.clear();
@@ -119,81 +87,14 @@ public:
         return mCompressedString;
     }
 
-    /*template <typename T, typename T2>
-    static void printPair(const std::pair<int, T2>& pair) {
-    std::cout << "(" << pair.first << ", ";
-
-    // Print the second element based on its type
-    if constexpr (std::is_same_v<T2, int>) {
-        std::cout << pair.second;
-    } else if constexpr (std::is_same_v<T2, double>) {
-        std::cout << pair.second;
-    } else if constexpr (std::is_same_v<T2, char>) {
-        std::cout << "'" << pair.second << "'";
-    } else if constexpr (std::is_same_v<T2, std::vector<int>>) {
-        // Assuming the second element is a vector of integers
-        std::cout << "vector<int> { ";
-        for (const auto& elem : pair.second) {
-            std::cout << elem << " ";
+    void printCompressedData() const {
+    for (const auto& pair : mCompressedData) {
+        cout << "(" << pair.first << ", ";
+        for (const auto& element : pair.second) {
+            cout << element;
         }
-        std::cout << "}";
-    } else if constexpr (std::is_same_v<T2, std::vector<double>>) {
-        // Assuming the second element is a vector of doubles
-        std::cout << "vector<double> { ";
-        for (const auto& elem : pair.second) {
-            std::cout << elem << " ";
-        }
-        std::cout << "}";
+        cout << ")" << endl;
     }
-    // Add more conditions for other types as needed
-
-    std::cout << ")" << std::endl;
-    }*/
-
-    template <typename T, typename T2>
-    void printCompressedData()
-    {
-        for (const auto& pair : mCompressedData)
-        {
-        std::cout << "(" << pair.first << ", ";
-
-        // Print the second element based on its type
-        if constexpr (std::is_same_v<T2, int>) 
-        {
-            std::cout << pair.second;
-        } 
-        else if constexpr (std::is_same_v<T2, double>) 
-        {
-            std::cout << pair.second;
-        } 
-        else if constexpr (std::is_same_v<T2, char>) 
-        {
-            std::cout << "'" << pair.second << "'";
-        } 
-        else if constexpr (std::is_same_v<T2, std::vector<int>>) 
-        {
-        // Assuming the second element is a vector of integers
-            std::cout << "vector<int> { ";
-            for (const auto& elem : pair.second) 
-            {
-                std::cout << elem << " ";
-            }
-            std::cout << "}";
-        }
-        else if constexpr (std::is_same_v<T2, std::vector<double>>) 
-        {
-        // Assuming the second element is a vector of doubles
-            std::cout << "vector<double> { ";
-            for (const auto& elem : pair.second) {
-                std::cout << elem << " ";
-            }
-            std::cout << "}";
-        }
-    // Add more conditions for other types as needed
-
-    std::cout << ")" << std::endl;
-    };
-        
     }
 
 private:  //wszystkie membery na koncu klasy, m na poczatku znaczy member
