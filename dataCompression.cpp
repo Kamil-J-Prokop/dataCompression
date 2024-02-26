@@ -3,10 +3,10 @@
 #include <string>
 #include <list>
 
-#include "ICompression.hpp"
-#include "IDecompression.hpp"
-#include "RunLengthEncodingCompression.hpp"
-#include "HuffmanEncoding.hpp"
+#include "Public/ICompression.hpp"
+#include "Public/IDecompression.hpp"
+#include "Public/RunLengthEncodingCompression.hpp"
+#include "Public/HuffmanEncoding.hpp"
 //#include "DataHandler.hpp"
 //#include "MultiThreadedCompression.hpp"
 
@@ -25,9 +25,9 @@ int main()
     vector<pair<int, char>> frequencies = {{5, 'a'}, {9, 'b'}, {12, 'c'}, {13, 'd'}, {16, 'e'}, {45, 'f'}};
     HuffmanEncoding huffman(frequencies);
 
-    string input1 = "abacadaeaf";
-    string encoded = huffman.encode(input1);
-    cout << "Encoded: " << encoded << endl;
+    //string input1 = "abacadaeaf";
+    //string encoded = huffman.encode(input1);
+    //cout << "Encoded: " << encoded << endl;
 
     // Call the compressData function
     //vector<pair<int, vector<char>>> compressedData = rlEncoding.compressData(input);
