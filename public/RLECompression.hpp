@@ -3,14 +3,16 @@
 
 #include "iCompression.hpp"
 #include <vector>
+#include <complex>
 #include <utility>
+#include <string>
 
 class RLECompression : public iCompression {
 
 public:
-    std::vector<std::pair<int, int>> compressData(std::vector<int> data) override;
+    std::vector<std::pair<int, std::complex<float>>> compressData(std::vector<std::complex<float>> data) override;
 
-    std::vector<std::pair<int, int>> getCompressedData() const override;
+    std::vector<std::pair<int, std::complex<float>>> getCompressedData() const override;
 
     void printCompressedData() const;
 
@@ -19,7 +21,7 @@ public:
     std::vector<std::string> getAlgorithmParameters() const override;
 
 private:
-    std::vector<std::pair<int, int>> compressedData;
+    std::vector<std::pair<int, std::complex<float>>> compressedData;
 
     std::vector<std::string> algoParameters;
 };
