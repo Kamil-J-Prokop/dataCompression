@@ -8,6 +8,8 @@
 #include <fcwt.h>
 
 int main(int argc, char * argv[]) {
+
+    /*
     std::vector<std::complex<float>> input = {
         {1.0f, 0.0f},
         {2.0f, 0.0f}, {2.0f, 0.0f},
@@ -49,14 +51,15 @@ int main(int argc, char * argv[]) {
     for (const auto& code : codes) {
         std::cout << "Complex: (" << code.first.first << ", " << code.first.second << ") -> Code: " << code.second << std::endl;
     }
+    */
 
     int n = 10; //signal length
     const int fs = 10; //sampling frequency
     float twopi = 2.0*3.1415;
     
     //3000 frequencies spread logartihmically between 1 and 32 Hz
-    const float f0 = 1;
-    const float f1 = 32;
+    constexpr float f0 = 1;
+    constexpr float f1 = 32;
     const int fn = 30;
 
     //Define number of threads for multithreaded use
@@ -122,6 +125,29 @@ int main(int argc, char * argv[]) {
  
 
     std::for_each(tfm.cbegin(), tfm.cend(), print);
+
+        // Create an instance of RLECompression
+    RLECompression rleWavelet;
+
+    // Call compressData method with complex<float> input
+    std::vector<std::pair<int, std::complex<float>>> compressed1 = rleWavelet.compressData(tfm);
+
+    // Print compressed data
+    rleWavelet.printCompressedData();
+
+    std::shared_ptr<Node> root1 = buildHuffmanTree(rleWavelet.getCompressedData());
+
+    // Initialize an unordered_map to store the Huffman codes
+    std::unordered_map<std::pair<int, std::complex<float>>, std::string, PairHash, PairEqual> codes1;
+
+    // Generate Huffman codes
+    generateHuffmanCodes(root1, codes1);
+
+    // Print the Huffman codes
+    for (const auto& code1 : codes1) {
+        std::cout << "Complex: (" << code1.first.first << ", " << code1.first.second << ") -> Code: " << code1.second << std::endl;
+    }
+
     
     /*
     std::ofstream outputFile("output.txt"); // create a new output file or overwrite an existing one
