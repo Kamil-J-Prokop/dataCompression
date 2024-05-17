@@ -1,0 +1,15 @@
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/DataCompressionProject.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/edit_cache.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/rebuild_cache.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/list_install_components.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/install.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/install/local.dir
+/home/kamil1/Projects/dataCompressionScratch/build/CMakeFiles/install/strip.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/fCWT.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/fCWT_example.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/edit_cache.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/rebuild_cache.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/list_install_components.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/install.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/install/local.dir
+/home/kamil1/Projects/dataCompressionScratch/build/fCWT/fCWT/CMakeFiles/install/strip.dir
